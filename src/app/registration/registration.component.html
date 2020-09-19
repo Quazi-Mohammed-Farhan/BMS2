@@ -1,0 +1,204 @@
+<mat-toolbar color="primary">
+  <span><img src="../../assets/logo.png" alt="logo" class="logo-reg"></span>
+  <span class="example-spacer reg">Registration</span>
+  <button mat-button (click)="cancel()">Cancel</button>
+</mat-toolbar>
+
+
+
+<mat-horizontal-stepper linear #stepper>
+  <mat-step [stepControl]="personalFormGroup" [editable]="isEditable">
+    <form [formGroup]="personalFormGroup">
+      <ng-template matStepLabel>Personal Details</ng-template>
+
+	  <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Username" formControlName="username">
+      </mat-form-field><br>
+
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Full name" formControlName="fullname">
+      </mat-form-field><br>
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" placeholder="Password" formControlName="password">
+      </mat-form-field><br>
+
+	  <mat-form-field>
+        <mat-label>Mobile Number</mat-label>
+        <input matInput placeholder="Contact No" formControlName="contactNo">
+      </mat-form-field><br>
+
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" formControlName="email">
+      </mat-form-field><br>
+
+      <mat-form-field>
+        <mat-label>Guardian Name</mat-label>
+        <input matInput placeholder="Guardian Name" formControlName="gname">
+      </mat-form-field><br>
+	  
+	  <mat-form-field>
+        <mat-label>Guardian Type</mat-label>
+        <input matInput placeholder="Guardian Type" formControlName="gtype">
+      </mat-form-field><br>
+
+	  <div style="padding-top: 5px; padding-bottom: 12px;">
+        <label>Gender: </label>
+        <mat-radio-group aria-labelledby="gender-radio-group-label" formControlName="gend">
+          <mat-radio-button class="gender-radio-button" *ngFor="let gender of genders" [value]="gender"
+            style="margin-left: 5px;">
+            {{gender}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+	  
+	  <mat-form-field appearance="fill">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput [matDatepicker]="picker" [max]="today" disabled style="color:blue" formControlName="dob">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker disabled="false"></mat-datepicker>
+      </mat-form-field><br>
+	  
+	  <div style="padding-top: 5px; padding-bottom: 12px;">
+        <label>Maritial Status: </label>
+        <mat-radio-group aria-labelledby="mstatus-radio-group-label" formControlName="martStatus">
+          <mat-radio-button class="mstatus-radio-button" *ngFor="let mstatus of maritialStatus" [value]="mstatus"
+            style="margin-left: 5px;">
+            {{mstatus}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+	  
+      <div>
+        <button mat-stroked-button color="primary" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+
+  <mat-step [stepControl]="addressFormGroup" [editable]="isEditable">
+    <form [formGroup]="addressFormGroup">
+      <ng-template matStepLabel>Residential Address Info</ng-template>
+
+      <mat-form-field>
+        <mat-label>Street</mat-label>
+        <textarea matInput placeholder="Address" formControlName="address"></textarea>
+      </mat-form-field><br>
+	  
+      <mat-form-field>
+        <mat-label>State</mat-label>
+        <input matInput placeholder="State" formControlName="state">
+      </mat-form-field><br>
+
+      <mat-form-field>
+        <mat-label>Country</mat-label>
+        <input matInput placeholder="Country" formControlName="country">
+      </mat-form-field><br>
+
+	  <mat-form-field>
+        <mat-label>Nationality</mat-label>
+        <input matInput placeholder="Citizenship" formControlName="citizenship">
+      </mat-form-field><br>
+
+      <div>
+        <button mat-stroked-button color="primary" (click)= "goBack(stepper)" matStepperPrevious>Back</button>
+        <button mat-stroked-button color="primary"  style="margin-left: 5px;" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+
+
+  <mat-step [stepControl]="accountFormGroup" [editable]="isEditable">
+    <form [formGroup]="accountFormGroup">
+      <ng-template matStepLabel>Account Details</ng-template>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Account Type</mat-label>
+        <mat-select formControlName="accountType">
+          <mat-option *ngFor="let acctype of accountTypes" [value]="acctype">
+            {{acctype}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field><br>
+
+	  <mat-form-field class="example-full-width">
+        <mat-label>Identity Proof</mat-label>
+        <mat-select formControlName="customerId">
+          <mat-option *ngFor="let idpf of custidProof" [value]="idpf">
+            {{idpf}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field><br>
+	       
+      <mat-form-field style="margin-left:10px">
+        <mat-label>Document Number</mat-label>
+        <input matInput placeholder="Document No" formControlName="documentNo">
+      </mat-form-field><br>
+
+      <mat-form-field>
+        <mat-label>Branch Name</mat-label>
+        <input matInput placeholder="Branch Name" formControlName="branchName">
+      </mat-form-field><br>
+
+      <mat-form-field>
+        <mat-label>Citizen Status</mat-label>
+        <input matInput placeholder="Citizens tatus" formControlName="citizenStatus">
+      </mat-form-field><br>
+
+	  <mat-form-field appearance="fill">
+        <mat-label>Date of Registration</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="regDate">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field><br> 
+	  
+      <mat-form-field>
+        <mat-label>Amount</mat-label>
+        <input matInput placeholder="Amount" formControlName="amount">
+      </mat-form-field>
+
+      <div>
+        <button mat-stroked-button color ="primary" (click)= "goBack(stepper)" matStepperPrevious>Back</button>
+        <button mat-stroked-button color ="primary" style="margin-left: 5px;" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <mat-step [stepControl]="otherFormGroup" [editable]="isEditable">
+    <form [formGroup]="otherFormGroup">
+      <ng-template matStepLabel>Other Details</ng-template>
+      <mat-form-field>
+        <mat-label>Account Holder Name</mat-label>
+        <input matInput placeholder="Account Holder Name" formControlName="acHolderName">
+      </mat-form-field><br>
+
+      <mat-form-field>
+        <mat-label>Account Holder No</mat-label>
+        <input matInput placeholder="Account Holder Number" formControlName="acHolderAccNo">
+      </mat-form-field><br>
+
+      <mat-form-field>
+        <mat-label>Account Holder Address</mat-label>
+        <input matInput placeholder="Account Holder Address" formControlName="acHolderAddr">
+      </mat-form-field>
+
+      <div>
+        <button mat-stroked-button color="primary" (click)= "goBack(stepper)" matStepperPrevious>Back</button>
+        <button mat-stroked-button style="margin-left: 5px;background-color: deeppink; color: white;"(click)="onSubmit()">Reset</button>
+      </div>
+
+      
+
+      <div class="statusMsg" *ngIf="message">{{message}} <button mat-stroked-button color="primary" routerLink="/login">Login</button></div>
+
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>
